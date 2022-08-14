@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+   <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">Food Web app</h1>
+      <p class="lead my-3">For food ordering services .</p>
+      <p class="lead mb-0"><a href="{{ url_for('views.about') }}" class="text-white fw-bold">Continue reading...</a></p>
+    </div>
+  </div>
+
+{% for restaurant in restaurants %}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top "     src="{{url_for('static', filename = 'restaurants/' + restaurant.image_file )  }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
+                    <p class="card-text">{{ restaurant.street }}</p>
+                    <p class="card-text"><small class="text-muted">{{ restaurant.city }}</small></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{{ url_for('restaurants.restaurant_menu' , id =restaurant.id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+ 
+{% endfor %}
+</div>
+{% endblock %}

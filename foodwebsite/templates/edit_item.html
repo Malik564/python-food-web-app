@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+       <form class="p-3   border rounded-3 mx-auto" action="" method="POST" enctype="multipart/form-data" >
+                            {{ form.hidden_tag() }}
+                        <legend class = 'border-bottom mb-3  '>Edit Item</legend>
+                      <div class="col-md-12 mt-3 " >
+                        {{
+                            form.name.label(class='form-label float-start')
+                        }}
+                    
+                        {% if form.name.errors %}
+                    				{{ form.name(class="form-control is-invalid")  }}
+                    				<div class="invalid-feedback">
+                    					{% for error in form.name.errors %}
+                    						<span>{{ error }}</span>
+                    					{% endfor %}
+                    				</div>
+                    		{% else %}
+                                
+                              {{
+                                  form.name(class='form-control') 
+                              }}
+                    		{% endif %}
+                          
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        {{
+                            form.image_file.label(class='form-label float-start')
+                        }}
+                        {% if form.image_file.errors %}
+                    				{{ form.image_file(class="form-control is-invalid")  }}
+                    				<div class="invalid-feedback">
+                    					{% for error in form.image_file.errors %}
+                    						<span>{{ error }}</span>
+                    					{% endfor %}
+                    				</div>
+                    		{% else %}
+                              {{
+                                  form.image_file(class='form-control')
+                              }}
+                    		{% endif %}
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        {{
+                            form.category.label(class='form-label float-start')
+                        }}
+                        {% if form.category.errors %}
+                    				{{ form.category(class="form-control is-invalid")  }}
+                    				<div class="invalid-feedback">
+                    					{% for error in form.category.errors %}
+                    						<span>{{ error }}</span>
+                    					{% endfor %}
+                    				</div>
+                    		{% else %}
+                              {{
+                                  form.category(class='form-control')
+                              }}
+                    		{% endif %}
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        {{
+                            form.price.label(class='form-label float-start')
+                        }}
+                        {% if form.price.errors %}
+                    				{{ form.price(class="form-control is-invalid")  }}
+                    				<div class="invalid-feedback">
+                    					{% for error in form.price.errors %}
+                    						<span>{{ error }}</span>
+                    					{% endfor %}
+                    				</div>
+                    		{% else %}
+                              {{
+                                  form.price(class='form-control')
+                              }}
+                    		{% endif %}
+                      </div>
+
+                      <div class="col-12 mt-3">
+                        <a  class="btn btn-secondary" href ="{{ url_for('restaurants.my_restaurant') }}" >cancel</a>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+
+</div>
+
+{% endblock %}

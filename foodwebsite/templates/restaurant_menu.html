@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class=" ">
+ 
+<div class="d-md-flex flex-md-equal ">
+  <div class="bg-dark col-md-12 mx-auto   text-center text-white overflow-hidden">
+    <div class="my-3 py-3">
+      <img class="rounded-circle" width="140" height="140"  src="{{ url_for('static' , filename='restaurants/' + restaurant.image_file  )  }}"> </img>
+      <h2 class="display-1">{{restaurant.restaurant_name}}<br></h2>   
+      <p class="lead">{{restaurant.street}} ,{{restaurant.city}}</p>
+     
+    </div>
+    
+    <div class="bg-light shadow-sm mx-auto" style="width: 80%; height:100%; border-radius: 21px 21px 0 0;">
+      <div class="text-dark float-end me-3 ">
+        <span> <a href="{{ url_for('cart.cart_data' , res_id = restaurant.id ) }}">Cart {{cart_count}} </a> </span>
+      </div>  
+      <div class="row" >  
+    {% for item in items %}
+        <div class="col-sm-4  border-right " >
+          <div class="text-dark m-2">
+            <img class="rounded-circle" width="140" height="140" src="{{ url_for('static' , filename='restaurants/' + item.item_image  ) }}"   >   </img>
+            <h2>{{ item.item_name }}</h2>
+            <p>Category: {{ item.item_category }}</p>
+            <p>Rs. {{ item.item_price }}</p>
+             
+            <form class="row mx-auto"  action=""  method="POST"> 
+              
+              <input type="text" name="itemId" id="itemId"  value="{{ item.id }}" class="hidden  mute"/>
+              <input type="text" name="quantity" id="quantity"  value="1" class="col-md-2  me-3  "/>
+              <input type="submit" name="add_to_cart" class="col-md-4  btn btn-primary " value = 'Add to Cart' />
+            </form>
+           
+        </div>
+
+      
+        </div>
+    {% endfor %}
+    </div>
+    
+    
+  </div>
+</div>
+
+</div>
+
+ 
+ 
+</div>
+
+
+
+
+
+
+{% endblock %}

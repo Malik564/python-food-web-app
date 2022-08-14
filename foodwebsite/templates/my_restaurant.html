@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class=" ">
+    {% if not restaurant %}
+    <div class="d-grid gap-2 col-6 mx-auto mt-4">
+        <a class="btn btn-info" type="button" href="{{ url_for('restaurants.add_restaurant') }}">Add Restaurant</a> 
+    </div>
+    {% else %}
+
+<div class="d-md-flex flex-md-equal ">
+  <div class="bg-dark col-md-12 mx-auto   text-center text-white overflow-hidden">
+    <div class="my-3 py-3">
+      <img class="rounded-circle" width="140" height="140"  src="{{ image_file }}"> </img>
+      <h2 class="display-1">{{restaurant.restaurant_name}}<br></h2>   
+      <p class="lead">{{restaurant.street}} ,{{restaurant.city}}</p>
+        <div class="d-grid gap-2 col-6 mx-auto mt-4">
+            <a class="btn btn-info" type="button" href="{{ url_for('restaurants.edit_restaurant') }}">Edit Restaurant</a> 
+        </div>
+    </div>
+    
+    <div class="bg-light shadow-sm mx-auto" style="width: 80%; height:100%; border-radius: 21px 21px 0 0;">
+       <div class="row" >
+    {% for item in items %}
+        <div class="col-sm-4" >
+          <div class=" text-dark m-2">
+            <img class="rounded-circle" width="140" height="140" src="{{ url_for('static' , filename='restaurants/' + item.item_image  ) }}"   >   </img>
+            <h2>{{ item.item_name }}</h2>
+            <p>Category: {{ item.item_category }}</p>
+            <p>Rs. {{ item.item_price }}</p>
+            <a   class="btn  btn-secondary btn-sm mt-1 mb-1 " href = "{{ url_for('restaurants.edit_item' , item_id = item.id) }}" > Edit</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete</button>
+            
+            <!--Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete ?	</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                   <form action="{{ url_for('restaurants.delete_item' , item_id = item.id) }}" method="POST">
+                    	<input type="submit" class="btn btn-danger" value="Delte">
+
+                    </form>
+                          </div>
+                </div>
+              </div>
+            </div>
+            
+           
+
+        </div><!-- /.col-lg-4 -->
+        </div>
+    {% endfor %}
+    
+    </div>
+    
+    <!-- Add Item Form -->
+    <form class="p-3   border rounded-3  bg-dark  col-10  mx-auto" action="" method="POST" enctype="multipart/form-data" >
+        {{ form.hidden_tag() }}
+    <legend class = 'border-bottom mb-3  '>Add Item</legend>
+  <div class="col-md-12 mt-3 " >
+    {{
+        form.name.label(class='form-label float-start')
+    }}
+
+    {% if form.name.errors %}
+				{{ form.name(class="form-control is-invalid")  }}
+				<div class="invalid-feedback">
+					{% for error in form.name.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+		{% else %}
+		
+          {{
+              form.name(class='form-control')
+          }}
+		{% endif %}
+					
+  </div>
+  <div class="col-md-12 mt-3">
+    {{
+        form.image_file.label(class='form-label float-start')
+    }}
+    {% if form.image_file.errors %}
+				{{ form.image_file(class="form-control is-invalid")  }}
+				<div class="invalid-feedback">
+					{% for error in form.image_file.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+		{% else %}
+          {{
+              form.image_file(class='form-control')
+          }}
+		{% endif %}
+  </div>
+  <div class="col-md-12 mt-3">
+    {{
+        form.category.label(class='form-label float-start')
+    }}
+    {% if form.category.errors %}
+				{{ form.category(class="form-control is-invalid")  }}
+				<div class="invalid-feedback">
+					{% for error in form.category.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+		{% else %}
+          {{
+              form.category(class='form-control')
+          }}
+		{% endif %}
+  </div>
+  <div class="col-md-12 mt-3">
+    {{
+        form.price.label(class='form-label float-start')
+    }}
+    {% if form.price.errors %}
+				{{ form.price(class="form-control is-invalid")  }}
+				<div class="invalid-feedback">
+					{% for error in form.price.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+		{% else %}
+          {{
+              form.price(class='form-control')
+          }}
+		{% endif %}
+  </div>
+    
+  <div class="col-12 mt-3">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </div>
+</form>
+    
+  </div>
+</div>
+
+</div>
+
+    {% endif %}
+ 
+</div>
+
+
+
+
+
+
+{% endblock %}
