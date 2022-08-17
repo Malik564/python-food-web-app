@@ -1,12 +1,13 @@
 from flask import Blueprint , render_template  , redirect , url_for
 from foodwebsite.model import Items, Restaurant , Cart,Orders
 from foodwebsite import db
-from flask_login import current_user
+from flask_login import current_user , login_user , logout_user , login_required
 import random
 
 cart = Blueprint('cart' , __name__ )
 
 @cart.route('/restaurant/<int:res_id>/item/<int:item_id>/qty/<int:qty>/add_to_cart' , methods = ['GET' , 'POST'])
+@login_required
 def add_to_cart(res_id , item_id,qty):
     restaurant = Restaurant.query.get(res_id)
     c = Cart.query.filter_by(placed_at = restaurant).filter_by(placed_by = current_user)
@@ -23,6 +24,7 @@ def add_to_cart(res_id , item_id,qty):
 
 
 @cart.route('/restaurant/<int:res_id>/cart' , methods = ['GET' ] )
+@login_required
 def cart_data(res_id):
     restaurant = Restaurant.query.get(res_id)
     cart = Cart.query.filter_by(placed_at = restaurant).filter_by(placed_by = current_user)
@@ -33,6 +35,7 @@ def cart_data(res_id):
 
 
 @cart.route('/restaurant/<int:res_id>/cart/<int:cart_id>/delete' , methods = [ 'GET','POST'])
+@login_required
 def delete_cart_item(res_id , cart_id):
     restaurant = Restaurant.query.get(res_id)
     cart = Cart.query.filter_by(placed_at = restaurant).filter_by(placed_by = current_user)
@@ -45,7 +48,9 @@ def delete_cart_item(res_id , cart_id):
 
 
 @cart.route('/restaurant/<int:res_id>/cart/proceed_order' , methods = [ 'GET','POST'])
+@login_required
 def proceed_order(res_id  ):
+    
     restaurant = Restaurant.query.get(res_id)
     cart = Cart.query.filter_by(placed_at = restaurant).filter_by(placed_by = current_user)
     invoice = random.randint(10000,1000000)

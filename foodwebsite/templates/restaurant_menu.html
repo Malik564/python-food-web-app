@@ -27,7 +27,7 @@
              
             <form class="row mx-auto"  action=""  method="POST"> 
               
-              <input type="text" name="itemId" id="itemId"  value="{{ item.id }}" class="hidden  mute"/>
+              <input type="hidden" name="itemId" id="itemId"  value="{{ item.id }}" class="hidden  mute"/>
               <input type="text" name="quantity" id="quantity"  value="1" class="col-md-2  me-3  "/>
               <input type="submit" name="add_to_cart" class="col-md-4  btn btn-primary " value = 'Add to Cart' />
             </form>

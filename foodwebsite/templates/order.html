@@ -31,7 +31,13 @@
               <td colspan="2" >{{ order.ordered.item_price }}</td> 
             </tr>
             {% endfor %}
-               
+                <tr class="table-active ">
+              <th scope="row "> </th>
+              <td colspan="2" class="table-active"><h5>Total Price</h5></td>
+              <td></td>
+              <td colspan="2" class="table-active text-danger"><h5>{{ total }}</h5></td>
+              <td colspan="2" > </td>
+            </tr>
           </tbody>
           </table>
           

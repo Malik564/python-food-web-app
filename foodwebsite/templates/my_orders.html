@@ -5,12 +5,6 @@
  
 <div class="d-md-flex flex-md-equal ">
   <div class="bg-dark col-md-12 mx-auto   text-center text-white overflow-hidden">
-    <div class="my-3 py-3">
-      <img class="rounded-circle" width="140" height="140"  src="{{ url_for('static' , filename='restaurants/' + restaurant.image_file  )  }}"> </img>
-      <h2 class="display-1">{{restaurant.restaurant_name}}<br></h2>   
-      <p class="lead">{{restaurant.street}} ,{{restaurant.city}}</p>
-      <h1 class="  bg-light text-dark">Orders<br></h1>
-    </div>
     
     <div class="bg-light shadow-sm mx-auto" style="width: 80%; height:100%; border-radius: 21px 21px 0 0;">
          
@@ -19,9 +13,9 @@
           <tbody>
             <tr>
               <th scope="row"  class="table-active"></th>
-              <td colspan="2" class="table-active">Invoice</td>
+              <td colspan="2" class="table-active">Invoice </td>
               <td  class="table-active">Name</td>
-              <td  class="table-active">Status</td>
+              <td  class="table-active">status</td>
             </tr>
             {% for order in orders %}
             <tr>
@@ -29,7 +23,7 @@
               <td colspan="2" class="table-active">{{order.invoice}}</td>
               <td>{{ order.order_by.username }}</td>
               <td colspan="2" class="table-active">{{order.orderStatus}}</td>
-              <td colspan="2" ><a  method='POST' href="{{ url_for('orders.order_data' , inv= order.invoice) }}">open</a></td>
+              <td colspan="2" ><a  method='POST' href="{{ url_for('orders.my_order' , inv= order.invoice) }}">open</a></td>
             </tr>
             {% endfor %}
                
@@ -39,7 +33,7 @@
           
 
           {% else %}
-          <h1 class="text-dark">No Orders Yet</h1>
+          <h1 class="text-dark">Continue Shopping</h1>
           {% endif %}
     </div>
    </div>

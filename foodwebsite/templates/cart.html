@@ -32,11 +32,11 @@
               <td colspan="2" ><a  method='POST' href="{{ url_for('cart.delete_cart_item' , res_id=restaurant.id , cart_id =c.id ) }}">Delete</a></td>
             </tr>
             {% endfor %}
-              <tr class="table-active">
+            <tr class="table-active ">
               <th scope="row "> </th>
-              <td colspan="2" class="table-active">Total Price</td>
-              <td>x </td>
-              <td colspan="2" class="table-active">{{ total }}</td>
+              <td colspan="2" class="table-active"><h5>Total Price</h5></td>
+              <td></td>
+              <td colspan="2" class="table-active text-danger"><h5>{{ total }}</h5></td>
               <td colspan="2" > </td>
             </tr>
 

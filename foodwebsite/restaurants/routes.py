@@ -155,7 +155,10 @@ def restaurant_menu(id):
     restaurant = Restaurant.query.get(id)
     if restaurant:
         items = Items.query.filter_by( owner = restaurant)
-        cart_count = Cart.query.filter_by(placed_by = current_user).filter_by(placed_at = restaurant).count()
+        cart_count = 0
+        if current_user.is_authenticated:
+            cart_count = Cart.query.filter_by(placed_by = current_user).filter_by(placed_at = restaurant).count()
+        
         if request.method == 'POST':
             quantity = request.form['quantity']
             item_id = request.form['itemId']
